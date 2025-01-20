@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monweb</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gUgBZKE0AWXo+66+Lw9oXZGR1bhIHpw/Ae6U8hMZMZtM7MuDt1bwBsdpX/Mmmcx2FzL2R0chc9g8yJ/x+Y7tnTgMLc/m1Qgi0w02Q/1u051vt/1mq1jpvxuuOJQ1wz1QfQ+qbSJOCUvXL8tcuH8xw3Aq7PPSHIB1Ryi0/0hoepqRwmWk="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      /* RÃ©initialisation des styles par dÃ©faut */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Mise en page gÃ©nÃ©rale */
+      body {
+        font-family: "Roboto", sans-serif;
+        width: 100%;
+        height: 100vh;
+        background-image: url("./mon\ blog.jpg");
+        background-size: cover; /* Adapte l'image à la taille de l'écran */
+        background-repeat: no-repeat; /* Évite que l'image se répète */
+        background-position: center; /* Centre l'image dans la fenêtre */
+        color: #333;
+        line-height: 1.6;
+      }
+
+      /* Container pour le contenu */
+      .container {
+        width: 90%;
+        margin: 0 auto;
+      }
+
+      /* En-tÃªte */
+      header .logo h1 {
+        font-size: 3rem; /* Increase font size */
+        font-weight: bold; /* Make text bold */
+        text-transform: uppercase; /* Convert text to uppercase */
+        letter-spacing: 3px; /* Increase letter spacing */
+        background: linear-gradient(
+          90deg,
+          #ff7e5f,
+          #feb47b
+        ); /* Apply a gradient background */
+        /* Clip gradient to text only */
+        -webkit-text-fill-color: transparent; /* Make the text background transparent */
+        text-align: center; /* Center text horizontally */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle text shadow */
+        transition: transform 0.3s ease, text-shadow 0.3s ease; /* Smooth transitions for hover effects */
+      }
+
+      header .logo h1:hover {
+        transform: scale(1.1); /* Agrandit légèrement le texte au survol */
+        text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4); /* Renforce l'ombre au survol */
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      nav ul li {
+        margin: 0 15px;
+      }
+
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s;
+      }
+
+      nav ul li a:hover {
+        color: #007bff;
+      }
+
+      /* Section d'accueil */
+      .home {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("https://via.placeholder.com/1920x1080") no-repeat center
+            center/cover;
+        color: white;
+        text-align: center;
+        padding: 120px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero h2 {
+        font-size: 4rem; /* Taille du texte pour qu'il soit bien visible */
+        margin-bottom: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        background: linear-gradient(
+          90deg,
+          #c850c0,
+          #4158d0
+        ); /* Dégradé vibrant violet-or */
+
+        -webkit-text-fill-color: transparent;
+        letter-spacing: 3px; /* Espacement plus large pour aérer le texte */
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* Ombre douce pour ajouter du relief */
+        transition: transform 0.3s ease-in-out; /* Animation de transformation */
+      }
+
+      .hero h2:hover {
+        transform: scale(1.1); /* Légère augmentation au survol */
+      }
+
+      .hero p {
+        font-size: 1.6rem; /* Augmenter la taille pour plus de lisibilité */
+        max-width: 900px; /* Plus d'espace pour le texte */
+        margin: 20px auto;
+        color: rgba(
+          240,
+          240,
+          240,
+          0.8
+        ); /* Teinte claire mais pas complètement blanche */
+        line-height: 1.8;
+        letter-spacing: 1px; /* Espacement plus grand pour une lecture plus fluide */
+      }
+
+      .hero button {
+        margin-top: 30px;
+        padding: 15px 30px;
+        background-color: #c850c0; /* Violet féminin */
+        color: white;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.3rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease,
+          box-shadow 0.3s ease;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Ombre douce pour un effet flottant */
+      }
+
+      .hero button:hover {
+        background-color: #4158d0; /* Or féminin au survol */
+        transform: scale(1.1); /* Agrandir légèrement le bouton */
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3); /* Ombre plus grande pour plus de profondeur */
+      }
+
+      /* Section des articles */
+
+      .home {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("https://via.placeholder.com/1920x1080") no-repeat center
+            center/cover;
+        color: white;
+        text-align: center;
+        padding: 120px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .hero h2 {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        background: linear-gradient(
+          90deg,
+          #dcb7b7,
+          #c0a9c8
+        ); /* Dégradé rose poudré et mauve doux */
+
+        -webkit-text-fill-color: transparent;
+        letter-spacing: 2px;
+      }
+
+      .hero p {
+        font-size: 1.5rem;
+        max-width: 800px;
+        margin: 0 auto;
+        color: #f5f5f5; /* Texte légèrement plus clair pour contraste */
+        line-height: 1.8;
+      }
+
+      .hero button {
+        margin-top: 30px;
+        padding: 15px 30px;
+        background-color: #c0a9c8; /* Couleur mauve clair */
+        color: white;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+
+      .hero button:hover {
+        background-color: #dcb7b7; /* Rosé clair au survol */
+        transform: scale(1.05);
+      }
+
+      /* Section des articles */
+
+      .articles {
+        padding: 80px 20px;
+        text-align: center;
+        background: linear-gradient(
+          135deg,
+          #4a4a4a,
+          #2f2f2f
+        ); /* Fond sombre avec un léger gris chaud */
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        margin-top: 30px;
+      }
+      h2::first-letter {
+        color: red;
+        initial-letter: 2 1;
+      }
+      .articles h2 {
+        font-size: 3rem;
+        margin-bottom: 50px;
+        color: #f5f5f5; /* Texte clair pour le titre */
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .article-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+      }
+
+      .article {
+        background: linear-gradient(
+          135deg,
+          #dcb7b7,
+          #c0a9c8
+        ); /* Dégradé rose poudré et mauve doux */
+        color: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        overflow: hidden;
+      }
+
+      .article:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+      }
+
+      .article img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        margin-bottom: 15px;
+      }
+
+      .article h3 {
+        font-size: 2rem; /* Augmenter la taille du titre pour un look plus dynamique */
+        margin: 15px 0; /* Espacement plus large pour mieux aérer */
+        font-weight: 600; /* Poids de police moins intense pour une sensation plus légère */
+        color: #4b4b4b; /* Couleur gris foncé moderne et élégante */
+        letter-spacing: 0.5px; /* Espacement des lettres pour plus de lisibilité */
+        text-transform: capitalize; /* Capitaliser le texte pour plus de modernité */
+      }
+
+      .article p {
+        font-size: 1.1rem; /* Taille de police légèrement augmentée pour améliorer la lisibilité */
+        margin: 10px 0; /* Espacement ajusté pour plus d'aération */
+        line-height: 1.8; /* Augmenter l'interligne pour rendre le texte plus aéré et facile à lire */
+        color: #777; /* Gris moyen pour un contraste doux, plus moderne */
+        font-family: "Helvetica Neue", sans-serif; /* Police sans-serif moderne */
+      }
+
+      .article a {
+        display: inline-block;
+        background-color: #f5f5f5; /* Blanc cassé doux pour le lien */
+        color: #6e4e6a; /* Violet chaud pour le texte */
+        text-decoration: none;
+        font-weight: bold;
+        padding: 10px 15px;
+        border-radius: 50px;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .article a:hover {
+        background-color: #dcb7b7; /* Rosé clair au survol */
+        color: white;
+      }
+
+      /* Pagination */
+
+      /* Section Ã  propos */
+      .about {
+        padding: 40px 0;
+        text-align: center;
+      }
+
+      .about p {
+        max-width: 800px;
+        margin: 0 auto;
+        font-size: 1.1rem;
+      }
+
+      /* Formulaire de contact */
+      .contact {
+        padding: 40px 0;
+        text-align: center;
+      }
+
+      form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #f8f8f8;
+      }
+
+      form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      form input,
+      form textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+      }
+
+      form textarea {
+        resize: vertical;
+        height: 100px;
+      }
+
+      form button {
+        background-color: #4caf50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+
+      form button:hover {
+        background-color: #45a049;
+      }
+
+      #responseMessage {
+        margin-top: 15px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        background-color: #f0f0f0;
+      }
+
+      /* Footer */
+      footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        margin-top: 40px;
+      }
+
+      .nav-links ul li ::after {
+        content: "";
+        width: 0%;
+        height: 2px;
+        background: #4158d0;
+        display: block;
+        margin: auto;
+        transition: 0.5s;
+      }
+
+      .nav-links ul li :hover:after {
+        width: 100%;
+      }
+      .hero-btn {
+        display: inline-block;
+        text-decoration: none;
+        color: #fff; /* Couleur du texte */
+        background-color: #5d2869; /* Couleur de fond */
+        border: 1px solid #6b2979;
+        padding: 12px 34px;
+        font-size: 13px;
+        border-radius: 5px; /* Ajoute des coins arrondis */
+        position: relative;
+        cursor: pointer;
+        overflow: hidden; /* Masque le débordement pour l'effet de survol */
+      }
+
+      .hero-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background-color: rgba(
+          255,
+          255,
+          255,
+          0.1
+        ); /* Couleur de l'effet de survol */
+        transition: all 0.3s ease-in-out;
+      }
+
+      .hero-btn:hover::before {
+        height: 100%;
+      }
+
+      .hero-btn:hover {
+        color: #fff;
+      }
+      @media (max-width: 700px) {
+        .hero h2 {
+          font-size: 20px;
+        }
+      }
+
+      .course {
+        width: 80%;
+        max-width: 960px;
+        margin: auto;
+        text-align: center;
+        padding-top: 5rem;
+        color: #070303;
+      }
+
+      .row {
+        margin: 5%;
+        display: flex;
+        justify-content: space-between;
+      }
+      .course-col {
+        flex-basis: 31%;
+        background: #b79b9b;
+        border-radius: 10px;
+        margin-bottom: 5%;
+        padding: 20px 12px;
+        box-sizing: border-box;
+        transition: 0.5s;
+      }
+      h3 {
+        text-align: center;
+        font-weight: 600;
+        margin: 10px 0;
+      }
+      .course-col :hover {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      }
+      @media (max-width: 700px) {
+        .row {
+          flex-direction: column;
+        }
+      }
+      .campus {
+        width: 80%;
+        margin: auto;
+        text-align: center;
+        padding-top: 50px;
+      }
+      .compus-col {
+        flex-basis: 32%;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        position: relative;
+        overflow: hidden;
+      }
+      .compus-col img {
+        width: 100%;
+      }
+      .layer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        transition: background-color 0.5s ease-in-out; /* Améliore la transition */
+      }
+
+      .layer:hover {
+        background-color: rgb(225, 39, 39); /* Correction de la valeur RGBA */
+      }
+      .layer h3 {
+        width: 100%;
+        font-weight: 500;
+        color: #fff;
+        font-size: 26px;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        position: absolute;
+        opacity: 0;
+        transition: 0.5s;
+      }
+      .layer:hover h3 {
+        bottom: 49%;
+        opacity: 1;
+      }
+      .fbb {
+        width: 100%;
+        text-align: center;
+        padding: 30px 0;
+      }
+      .fbb h4 {
+        margin-bottom: 25px;
+        margin-top: 20px;
+        font-weight: 600;
+      }
+      /* Vos styles CSS ici */
+    </style>
+    <link rel="shortcut icon" href="./progm2.jpg" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <h1>Mon Blog</h1>
+      </div>
+      <section class="hhh">
+        <nav>
+          <a href="indexe.html"> /></a>
+          <div class="nav-links">
+            <ul>
+              <li><a href="">Accueil</a></li>
+              <li><a href="">Articles</a></li>
+              <li><a href="">À propos</a></li>
+              <li><a href="">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+      </section>
+    </header>
+
+    <section class="home">
+      <div class="hero">
+        <h2 style="color: #95a2b1 h">Bienvenue sur mon blog</h2>
+        <p>
+          Élargissez vos horizons grâce à une sélection d'articles variés et
+          instructifs
+        </p>
+        <a href="" class="hero-btn">Visit Us To Know More </a>
+      </div>
+    </section>
+
+    <section class="course">
+      <div class="row">
+        <div class="course-col">
+          <h3>L'évolution de l'IA" de KAIZEN</h3>
+          <p>
+            Cet article offre une vue d'ensemble de l'histoire de l'IA, depuis
+            ses débuts jusqu'aux avancées les plus récentes. Il explore les
+            défis, les progrès et les changements de paradigme qui ont marqué ce
+            domaine. C'est un excellent point de départ pour comprendre les
+            fondements de l'IA et ses principales étapes de développement.
+          </p>
+        </div>
+
+        <div class="course-col">
+          <h3>Intelligence artificielle : comment l'IA façonne l'avenir ?</h3>
+          <p>
+            concentre sur l'impact de l'IA sur notre société et notre économie.
+            Il met en évidence les nombreuses applications de l'IA dans
+            différents secteurs et les défis qu'elle pose. C'est un bon article
+            pour discuter des implications de l'IA sur notre quotidien et sur le
+            monde du travail.
+          </p>
+        </div>
+        <div class="course-col">
+          <h3>
+            Explorons l'avenir de l'intelligence artificielle : Progrès,
+            possibilités et implications" de CentraleSupélec
+          </h3>
+          <p>
+            penche sur les dernières avancées en matière d'IA et explore les
+            possibilités qu'elles ouvrent. Il aborde également les questions
+            éthiques et sociétales liées au développement de l'IA. C'est un
+            article plus technique, mais qui offre une vision prospective
+            intéressante sur l'avenir de l'IA.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="campus">
+      <h1 style="color: #070303">our domaines</h1>
+      <p>welcom to MonBlog</p>
+
+      <div class="row">
+        <div class="compus-col">
+          <img src="./js.jpg" alt="" />
+          <div class="layer">
+            <h3>javascript</h3>
+          </div>
+        </div>
+        <div class="compus-col">
+          <img src="./css.web.jpg" alt="" />
+          <div class="layer">
+            <h3>CSS</h3>
+          </div>
+        </div>
+        <div class="compus-col">
+          <img src="./html web.webp" alt="" />
+          <div class="layer">
+            <h3>HTML</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="articles">
+      <h2
+        style="
+          color: #e6dde8;
+          font-size: 3rem;
+          text-align: center;
+          position: relative;
+          font-weight: bold;
+          overflow: hidden;
+        "
+      >
+        Nos Derniers Articles
+        <span
+          style="
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #8a1971;
+            transform: translateY(100%);
+            animation: slideUp 0.5s forwards;
+          "
+        ></span>
+      </h2>
+
+      <style>
+        @keyframes slideUp {
+          0% {
+            transform: translateY(100%);
+          }
+          100% {
+            transform: translateY(0);
+          }
+        }
+      </style>
+      <div class="article-list">
+        <div class="article">
+          <img src="./programmeurs.jpg" alt="Article 1" />
+          <h3>Comment améliorer vos compétences en programmation</h3>
+          <p>
+            Découvrez les meilleures pratiques et ressources pour apprendre et
+            progresser rapidement en programmation.
+          </p>
+          <a
+            href="https://www.free-work.com/fr/tech-it/blog/formations/comment-ameliorer-ses-competences-en-programmation"
+            target="_blank"
+            >Lire plus</a
+          >
+        </div>
+        <div class="article">
+          <img src="./progm2.jpg" alt="Article 2" />
+          <h3>Les technologies web de demain</h3>
+          <p>
+            Une exploration des tendances futures en matière de technologies web
+            et d'outils de développement.
+          </p>
+          <a
+            href="https://www.free-work.com/fr/tech-it/blog/actualites-informatiques/tendances-tech-2025-quelles-technologies-vont-dominer-cette-annee"
+            target="_blank"
+            >Lire plus</a
+          >
+        </div>
+        <div class="article">
+          <img
+            src="./javascript-langage-de-programmation-2022.jpeg"
+            alt="Article 3"
+          />
+          <h3>Guide du développeur JavaScript moderne</h3>
+          <p>
+            Un guide complet pour utiliser JavaScript efficacement dans vos
+            projets web modernes.
+          </p>
+          <a
+            href="https://book1.fr/javascript-moderne-pour-les-impatients"
+            target="_blank"
+            >Lire plus</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <div class="contact">
+      <h2>Contactez-nous</h2>
+      <form id="contactForm">
+        <label for="name">Nom et Prénom:</label>
+        <input type="text" id="name" name="name" required />
+        <br />
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+        <br />
+        <label for="comment">Votre message:</label>
+        <textarea id="comment" name="comment" rows="4"></textarea>
+        <br />
+        <button type="submit">Envoyer</button>
+      </form>
+      <p id="responseMessage"></p>
+    </div>
+    <section class="fbb">
+      <h4>About us</h4>
+      <p>
+        mon premier projet sert a introduire un peu les trois languages de IA
+        (JavaScript , HTML , CSS)
+      </p>
+      <div class="icons">
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-linkedin"></i>
+      </div>
+    </section>
+    <footer>
+      <p>
+        © 2025 Mon Blog. Tous droits réservés. <a href="#">Mentions légales</a>
+      </p>
+    </footer>
+
+    <script>
+            // h223
+
+            // hyt5
+            const articlesButton = document.getElementById("articlesButton");
+
+            articlesButton.addEventListener("click", () => {
+              const articlesSection = document.querySelector(".articles");
+              articlesSection.scrollIntoView({ behavior: "smooth" });
+            });
+
+            // codedd
+            document
+              .getElementById("contactForm")
+              .addEventListener("submit", (event) => {
+                event.preventDefault();
+                const name = document.getElementById("name").value;
+                const email = document.getElementById("email").value;
+                const comment = document.getElementById("comment").value;
+
+                if (name && email) {
+                  document.getElementById(
+                    "responseMessage"
+                  ).textContent = Merci ${name} pour votre message ! Nous vous répondrons bientôt. Votre commentaire : "${comment}";
+
+                } else {
+                  document.getElementById("responseMessage").textContent =
+                    "Veuillez remplir tous les champs obligatoires.";
+                }
+              });
+            const articles = [
+              {
+                title: "Introduction à JavaScript",
+                content:
+                  "JavaScript est un langage de programmation populaire. Dans cet article, nous explorons ses concepts de base.",
+                image:
+                  "https://via.placeholder.com/300x200/007BFF/FFFFFF?text=JavaScript",
+              },
+              {
+                title: "Les bases de HTML et CSS",
+                content:
+                  "HTML et CSS sont les bases du développement web. Découvrez comment ils fonctionnent ensemble.",
+                image:
+                  "https://via.placeholder.com/300x200/28a745/FFFFFF?text=HTML+%26+CSS",
+              },
+              {
+                title: "Comprendre la POO",
+                content:
+                  "La programmation orientée objet est un paradigme qui est largement utilisé en développement logiciel.",
+                image: "https://via.placeholder.com/300x200/f39c12/FFFFFF?text=POO",
+              },
+              {
+                title: "Vue.js et ses avantages",
+                content:
+                  "Vue.js est un framework JavaScript progressif qui est facile à intégrer dans des projets.",
+                image:
+                  "https://via.placeholder.com/300x200/f1c40f/FFFFFF?text=Vue.js",
+              },
+            ];
+
+            // Variables de pagination
+            let currentPage = 1;
+            const articlesPerPage = 10;
+
+            // Afficher les articles pour la page actuelle
+            function displayArticles(page) {
+              const articleList = document.getElementById("article-list");
+              articleList.innerHTML = "";
+
+              const start = (page - 1) * articlesPerPage;
+              const end = start + articlesPerPage;
+              const paginatedArticles = articles.slice(start, end);
+
+              paginatedArticles.forEach((article) => {
+                const articleElement = document.createElement("div");
+                articleElement.classList.add("article");
+                articleElement.innerHTML = `
+          <img src="${article.image}" alt="${article.title}" />
+          <h3>${article.title}</h3>
+          <p>${article.content}</p>
+          <a href="${article.url || '#'}">Lire plus</a>
+      `;
+
+                articleList.appendChild(articleElement);
+              });
+
+              document.getElementById("currentPage").textContent = Page ${page};
+            }
+
+            // Gérer la pagination
+            document.getElementById("nextPage").addEventListener("click", () => {
+              if (currentPage < Math.ceil(articles.length / articlesPerPage)) {
+                currentPage++;
+                displayArticles(currentPage);
+              }
+            });
+
+            document.getElementById("prevPage").addEventListener("click", () => {
+              if (currentPage > 1) {
+                currentPage--;
+                displayArticles(currentPage);
+              }
+            });
+
+            // Soumettre le formulaire de contact
+            document
+              .getElementById("contactForm")
+              .addEventListener("submit", function (event) {
+                event.preventDefault();
+                const name = document.getElementById("name").value;
+                const email = document.getElementById("email").value;
+                const message = document.getElementById("message").value;
+
+                if (name && email && message) {
+                  document.getElementById(
+                    "responseMessage"
+                  ).textContent = Merci, ${name}! Votre message a été envoyé.;
+                  document.getElementById("responseMessage").style.color = "green";
+                  this.reset();
+                } else {
+                  document.getElementById("responseMessage").textContent =
+                    "Veuillez remplir tous les champs.";
+                  document.getElementById("responseMessage").style.color = "red";
+                }
+              });
+
+            displayArticles(currentPage);
+            // t JavaScript ici
+    </script>
+  </body>
+</html>
